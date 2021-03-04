@@ -7,11 +7,10 @@ import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 
 import { ITodo } from '../../interfaces';
 
-
 interface ITodoItem {
-    todo: ITodo,
-    completeTodo: (id: number) => void,
-    removeTodo: (id: number) => void,
+    todo: ITodo;
+    completeTodo: (id: number) => void;
+    removeTodo: (id: number) => void;
 }
 
 const TodoItem: React.FC<ITodoItem> = ({ todo, completeTodo, removeTodo }) => {
@@ -22,7 +21,7 @@ const TodoItem: React.FC<ITodoItem> = ({ todo, completeTodo, removeTodo }) => {
     };
 
     const handleRemoveClick = () => {
-        if (window.confirm("Are you sure want to delete ToDo?")) {
+        if (window.confirm('Are you sure want to delete ToDo?')) {
             removeTodo(todo.id);
         }
     };
@@ -34,21 +33,24 @@ const TodoItem: React.FC<ITodoItem> = ({ todo, completeTodo, removeTodo }) => {
                     className={classes.formControlLabel}
                     control={
                         <Checkbox
+                            checked={todo.completed}
                             name="checkedB"
                             color="primary"
                             onClick={handleCompleteClick}
                         />
                     }
-                    label={<Typography
-                        className={todo.completed ? classes.formControlLabelTypoCompleted : classes.formControlLabelTypo}
-                    >
-                        {todo.title}
-                    </Typography>}
+                    label={
+                        <Typography
+                            className={
+                                todo.completed
+                                    ? classes.formControlLabelTypoCompleted
+                                    : classes.formControlLabelTypo
+                            }>
+                            {todo.title}
+                        </Typography>
+                    }
                 />
-                <DeleteForeverIcon
-                    className={classes.deleteIcon}
-                    onClick={handleRemoveClick}
-                />
+                <DeleteForeverIcon className={classes.deleteIcon} onClick={handleRemoveClick} />
             </Paper>
         </Grid>
     );
